@@ -12,25 +12,20 @@ document.addEventListener('DOMContentLoaded', () => {
         showSlide(currentSlide);
     }
 
-    function prevSlide() {
-        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-        showSlide(currentSlide);
-    }
+    // Changed to 2 seconds
+    let slideInterval = setInterval(nextSlide, 2000);
 
-    // Auto slide every 6 seconds
-    let slideInterval = setInterval(nextSlide, 6000);
-
-    // Manual controls
     document.querySelector('.next').addEventListener('click', () => {
         clearInterval(slideInterval);
         nextSlide();
-        slideInterval = setInterval(nextSlide, 6000);
+        slideInterval = setInterval(nextSlide, 2000);
     });
 
     document.querySelector('.prev').addEventListener('click', () => {
         clearInterval(slideInterval);
-        prevSlide();
-        slideInterval = setInterval(nextSlide, 6000);
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(currentSlide);
+        slideInterval = setInterval(nextSlide, 2000);
     });
 
     // Smooth scrolling
